@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+@mixin pad{
+    @media(max-width:992px){
+      @content;
+    }
+  }
+
+  @mixin mobile{
+    @media(max-width:992px){
+      @content;
+    }
+  }
+
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+
+img{
+    max-width: 100%;
+}
+
+html{
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  margin-top: 100px; 
+  // 不知道為什麼，html 如果沒有設定 margin ，滑鼠上/下滑到頂端時，會往外延伸長出多餘的空間，但是設定數字夠大的 margin 後，就恢復正常。
+  // 似乎是電腦版 chrome 的一個 bug 
+  // Chrome has a really bad scroll threshold
+  // https://stackoverflow.com/questions/56629124/chromes-hidden-css-scroll-snap-threshold-and-how-to-change-it
+}
+
+body {
+    position: relative;
+    color: #000;
+    background-color: #FF608B;
+    transition: background-color 1s ease;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.header{
+    position: fixed;
+    padding-top: 20px;
+    left: 15px;
+    top: 0;
+    z-index: 2;
+
+    img {
+        width: 260px;
+        height: auto;
+    }
+
+}
+
+.panel {
+  /* min height incase content is higher than window height */
+  scroll-snap-align: start;
+  scroll-snap-stop: always; //用力滑一次也只滑一個
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @include pad{
+    scroll-snap-align: unset;
+    padding: 20px;
+}
+//   outline: 20px solid black;
+
+    img{
+        max-width: 420px;
+        margin: 0 auto;
+
+        @include mobile{
+            width: 100%;
+        }
+    }
+
+    h3{
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 18px;
+    }
+
+}
+
+.buy-link {
+    font-weight: 500;
+    font-size: 15px;
+
+    a{
+        color: white;
+        text-decoration: none;
+        margin-right: 6px;
+
+        &:hover{
+            text-decoration: underline;
+          }
+      }
+}
+
+.buy-link.orin{
+    margin-top: 18px;
+}
+
+
+//目錄按鈕行動版
+button{
+    display: none;
+
+    @include mobile{
+        display: inline;
+        position: fixed;
+        top: 0;
+        right: 20px;
+        z-index: 2;
+
+        border: none;
+        background-color: transparent;
+        color: black;
+        cursor: pointer;
+
+        font-size: 40px;
+        padding-top: 15px;
+        width: 100px;
+        transition: color 0.15s linear;
+
+            
+        @media (any-hover: hover) {
+            &:hover {
+                color: white;
+            }
+        }
+
+        &:active{
+            transform: scale(1.15);
+        }
+    }
+}
+
+//目錄
+.menu{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    list-style-type: none;
+    font-size: 20px;
+
+    @include mobile{
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.25s linear;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: whitesmoke;
+        border: 1px solid #000;
+        right: 20px;
+        top: -50px;
+        height: 50%;
+        padding-top: 80px;
+        width: 100px;
+        font-size: 18px;
+        line-height: 2;
+    }
+  }
+
+  .menu.active{
+    visibility: visible;
+    opacity: 1;
+    top: 0px;
+  }
+  
+  .menulink{
+    color: black;
+    text-decoration: none;
+    font-size: 18px;
+  }
+
+
+  
+
+/* colours */
+.color-pink {
+  background-color: #FF608B;
+}
+
+.color-white {
+  background-color: #FFF;
+}
+.color-turquoise {
+  background-color: #00c1b5;
+}
+.color-orange {
+  background-color: #ff651a;
+}
+.color-gold {
+  background-color: #ffbe00;
+}
+.color-blue {
+  background-color: #1d3fbb;
+}
+.color-red {
+  background-color: #e30512;
+}
+
+// footer
+footer{
+    @include mobile{
+        margin-top: 50px;
+    }
+
+    a{
+        color: black;
+        text-decoration: none;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+
+    .description{
+        position: fixed;
+        left: 20px;
+        bottom: 20px;
+        width: 320px;
+        text-align: left;
+        font-size: 18px;
+        font-weight: 500;
+
+        @include pad{
+            position: relative;
+            bottom: 50px;
+        }
+        
+        @include mobile{
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+            left: 0px;
+        }
+
+    }
+
+    .copyright{
+        font-size: 12px;
+        font-weight: 400;
+    }
+
+    .contact{
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        font-size: 18px;
+        font-weight: 500;
+
+        @include pad{
+            position: relative;
+            text-align: left;
+            left: 20px;
+            transform: translateY(-50px);
+        }
+
+        @include mobile{
+            text-align: center;
+            top: 0px;
+            left: 0px;
+            margin-top: 10px;
+        }
+    }
+}
