@@ -1,6 +1,6 @@
 # magazine-site
 
-### 實作網址： https://judy-nihao.github.io/magazine-site/
+### 實作網址： https://judy-nihao.github.io/magazine-site
 
 ### 實作功能
 - 背景換色：滾動時背景會隨雜誌配色切換
